@@ -1,12 +1,14 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class TicTacToe {
 
     static char[][] board = new char[3][3];
-
     static char humanSymbol;
     static char computerSymbol;
-    static String currentPlayer; // "human" or "computer"
+    static String currentPlayer;
+
+    static Scanner scanner = new Scanner(System.in); // shared Scanner
 
     // UC1: Initialize the board with '-'
     static void initBoard() {
@@ -33,7 +35,7 @@ public class TicTacToe {
     // UC2: Toss to decide first player and assign symbols
     static void toss() {
         Random rand = new Random();
-        int result = rand.nextInt(2); // 0 or 1
+        int result = rand.nextInt(2);
 
         if (result == 0) {
             currentPlayer = "human";
@@ -47,13 +49,24 @@ public class TicTacToe {
             System.out.println("💻 Computer won the toss! Computer plays first as X.");
         }
 
-        System.out.println("Your symbol  : " + humanSymbol);
+        System.out.println("Your symbol    : " + humanSymbol);
         System.out.println("Computer symbol: " + computerSymbol);
+    }
+
+    // UC3: Accept user slot input (1–9)
+    static int getUserInput() {
+        System.out.print("Enter your slot (1-9): ");
+        int slot = scanner.nextInt();
+        return slot;
     }
 
     public static void main(String[] args) {
         initBoard();
         printBoard();
         toss();
+
+        // Test UC3
+        int slot = getUserInput();
+        System.out.println("You entered slot: " + slot);
     }
 }
