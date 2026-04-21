@@ -69,16 +69,33 @@ public class TicTacToe {
         return (slot - 1) % 3;
     }
 
+    // UC5: Validate the move
+    static boolean isValidMove(int row, int col) {
+        // Check boundary
+        if (row < 0 || row > 2 || col < 0 || col > 2) {
+            System.out.println("❌ Invalid slot! Please enter a number between 1 and 9.");
+            return false;
+        }
+        // Check if cell is already occupied
+        if (board[row][col] != '-') {
+            System.out.println("❌ That slot is already taken! Choose another.");
+            return false;
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         initBoard();
         printBoard();
         toss();
 
-        // Test UC3 + UC4
+        // Test UC3 + UC4 + UC5
         int slot = getUserInput();
         int row = getRow(slot);
         int col = getCol(slot);
 
-        System.out.println("Slot " + slot + " → board[" + row + "][" + col + "]");
+        if (isValidMove(row, col)) {
+            System.out.println("✅ Valid move! Slot " + slot + " → board[" + row + "][" + col + "]");
+        }
     }
 }
