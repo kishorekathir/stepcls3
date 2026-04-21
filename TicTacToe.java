@@ -7,8 +7,7 @@ public class TicTacToe {
     static char humanSymbol;
     static char computerSymbol;
     static String currentPlayer;
-
-    static Scanner scanner = new Scanner(System.in); // shared Scanner
+    static Scanner scanner = new Scanner(System.in);
 
     // UC1: Initialize the board with '-'
     static void initBoard() {
@@ -60,13 +59,26 @@ public class TicTacToe {
         return slot;
     }
 
+    // UC4: Convert slot number to row index
+    static int getRow(int slot) {
+        return (slot - 1) / 3;
+    }
+
+    // UC4: Convert slot number to column index
+    static int getCol(int slot) {
+        return (slot - 1) % 3;
+    }
+
     public static void main(String[] args) {
         initBoard();
         printBoard();
         toss();
 
-        // Test UC3
+        // Test UC3 + UC4
         int slot = getUserInput();
-        System.out.println("You entered slot: " + slot);
+        int row = getRow(slot);
+        int col = getCol(slot);
+
+        System.out.println("Slot " + slot + " → board[" + row + "][" + col + "]");
     }
 }
